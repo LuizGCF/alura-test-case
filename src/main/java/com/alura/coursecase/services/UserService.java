@@ -37,4 +37,5 @@ public class UserService {
 
         return user.map(u -> GetUserResponse.fromModel(u)).orElseThrow(() -> new UserNotFoundException(ErrorsEnum.A101.code, ErrorsEnum.A101.message));
     }
+
 }

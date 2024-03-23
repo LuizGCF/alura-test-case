@@ -41,4 +41,22 @@ public class GlobalExceptionHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }
+
+    @ExceptionHandler({TokenGenerationFailedException.class})
+    public ResponseEntity<Object> handleTokenGenerationFailedException(TokenGenerationFailedException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({InvalidTokenException.class})
+    public ResponseEntity<Object> handleTokenInvalidTokenException(InvalidTokenException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
 }
