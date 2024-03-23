@@ -31,4 +31,17 @@ public class UserCreator {
                 .creationDate(LocalDateTime.now())
                 .build();
     }
+
+    public static UserModel createValidInstructorUser() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return UserModel.builder()
+                .id(2)
+                .name("Sam")
+                .username("sam")
+                .password(passwordEncoder.encode("password"))
+                .email("sam@gmail.com")
+                .role(RolesEnum.INSTRUCTOR.name())
+                .creationDate(LocalDateTime.now())
+                .build();
+    }
 }

@@ -20,7 +20,7 @@ public class PostUserRequest {
     private String name;
     @NotNull
     @NotEmpty(message = "The attribute username cannot be empty.")
-    @Pattern(regexp = "^[a-z]{1,20}+$", message = "The username must contain only lower case letters.")
+    @Pattern(regexp = "^[a-z]{1,20}+$", message = "The username must contain only lower case letters up to 20 characters.")
     private String username;
     @NotNull
     @Email(message = "The attribute email must be valid.")

@@ -1,10 +1,7 @@
 package com.alura.coursecase.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,14 +27,15 @@ public class UserModel implements UserDetails {
     @Column
     private String email;
     @Column
+    @Setter
     private String password;
     @Column
     private String role;
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    public void setPassword(String password) {
-        this.password = password;
+    public UserModel(Integer id) {
+        this.id = id;
     }
 
     @Override

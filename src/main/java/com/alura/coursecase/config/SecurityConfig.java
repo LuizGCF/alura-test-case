@@ -1,5 +1,6 @@
 package com.alura.coursecase.config;
 
+import com.alura.coursecase.enums.RolesEnum;
 import com.alura.coursecase.security.SecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,9 @@ public class SecurityConfig {
                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.POST, "/user", "/auth/login").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/user/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/user/**", "/course").hasRole(RolesEnum.ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/course").hasRole(RolesEnum.ADMIN.name())
+                                .requestMatchers(HttpMethod.PATCH, "/course/deactivate/**").hasRole(RolesEnum.ADMIN.name())
                                 .anyRequest().authenticated()
                         )
                         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

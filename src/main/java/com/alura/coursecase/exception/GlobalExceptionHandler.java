@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -32,9 +34,9 @@ public class GlobalExceptionHandler {
                 .body(response);
     }
 
-    @ExceptionHandler({UserValidationException.class})
-    public ResponseEntity<Object> handleUserValidationException(UserValidationException exception) {
-        ExceptionResponse response = new ExceptionResponse(ErrorsEnum.A103.code, ErrorsEnum.A103.message, HttpStatus.UNPROCESSABLE_ENTITY.value(), LocalDateTime.now(),
+    @ExceptionHandler({RequestValidationException.class})
+    public ResponseEntity<Object> handleRequestValidationException(RequestValidationException exception) {
+        ExceptionResponse response = new ExceptionResponse(ErrorsEnum.A002.code, ErrorsEnum.A002.message, HttpStatus.UNPROCESSABLE_ENTITY.value(), LocalDateTime.now(),
                 exception.getErrors().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
@@ -56,6 +58,52 @@ public class GlobalExceptionHandler {
         ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now(), null);
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({CourseCodeAlreadyExistsException.class})
+    public ResponseEntity<Object> handleCourseCodeAlreadyExistsException(CourseCodeAlreadyExistsException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.FORBIDDEN.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({InvalidRoleException.class})
+    public ResponseEntity<Object> handleInvalidRoleException(InvalidRoleException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.FORBIDDEN.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({CourseNotFoundException.class})
+    public ResponseEntity<Object> handleCourseNotFoundException(CourseNotFoundException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.NOT_FOUND.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({CourseAlreadyInactiveException.class})
+    public ResponseEntity<Object> handleCourseAlreadyInactiveException(CourseAlreadyInactiveException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.FORBIDDEN.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
+    public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception) {
+        ExceptionResponse response = new ExceptionResponse(ErrorsEnum.A002.code, ErrorsEnum.A002.message, HttpStatus.UNPROCESSABLE_ENTITY.value(), LocalDateTime.now(),
+                List.of(exception.getMessage()));
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }
