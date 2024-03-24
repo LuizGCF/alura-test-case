@@ -17,22 +17,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PostCourseRequest {
 
-    @NotNull
-    @NotEmpty(message = "The attribute name cannot be empty.")
+    @NotEmpty(message = "The attribute name is required.")
     private String name;
 
-    @NotNull
-    @NotEmpty(message = "The attribute code cannot be empty.")
+    @NotEmpty(message = "The attribute code is required.")
     @Pattern(regexp = "^[a-z\\-]{1,10}+$", message = "The code must contain only lower case letters and hyphens up to 10 characters.")
     private String code;
 
-    @NotNull(message = "The attribute id_instructor cannot be null.")
+    @NotNull(message = "The attribute id_instructor is required.")
     @Range(min = 1)
     @JsonAlias("id_instructor")
     private Integer idInstructor;
 
-    @NotNull
-    @NotEmpty(message = "The description username cannot be empty.")
+    @NotEmpty(message = "The description username is required.")
     private String description;
 
     public CourseModel toCourseModel() {

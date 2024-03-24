@@ -32,4 +32,8 @@ public class CourseModel {
     @Column(name = "inactivation_date")
     @Setter
     private LocalDateTime inactivationDate;
+
+    public CourseModel(Integer id) {
+        this.id = id;
+    }
 }

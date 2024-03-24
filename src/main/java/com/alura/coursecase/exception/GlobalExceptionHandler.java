@@ -5,6 +5,7 @@ import com.alura.coursecase.enums.ErrorsEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -104,6 +105,25 @@ public class GlobalExceptionHandler {
                 List.of(exception.getMessage()));
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({HttpMessageNotReadableException.class})
+    public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception) {
+        ExceptionResponse response = new ExceptionResponse(ErrorsEnum.A002.code, ErrorsEnum.A002.message, HttpStatus.UNPROCESSABLE_ENTITY.value(), LocalDateTime.now(),
+                List.of(exception.getMessage()));
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({UserAlreadyRegisteredException.class})
+    public ResponseEntity<Object> handleUserAlreadyRegisteredException(UserAlreadyRegisteredException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.FORBIDDEN.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }

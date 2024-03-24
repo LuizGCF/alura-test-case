@@ -15,20 +15,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PostUserRequest {
 
-    @NotNull
-    @NotEmpty(message = "The attribute name cannot be empty.")
+    @NotEmpty(message = "The attribute name is required.")
     private String name;
-    @NotNull
-    @NotEmpty(message = "The attribute username cannot be empty.")
+
+    @NotEmpty(message = "The attribute username is required.")
     @Pattern(regexp = "^[a-z]{1,20}+$", message = "The username must contain only lower case letters up to 20 characters.")
     private String username;
-    @NotNull
+
     @Email(message = "The attribute email must be valid.")
-    @NotEmpty(message = "The attribute email cannot be empty.")
+    @NotEmpty(message = "The attribute email is required.")
     private String email;
-    @NotNull
-    @NotEmpty(message = "The attribute password cannot be empty.")
+
+    @NotEmpty(message = "The attribute password is required.")
     private String password;
+    @NotNull(message = "The attribute role is required.")
     private RolesEnum role;
 
     public UserModel toUserModel() {

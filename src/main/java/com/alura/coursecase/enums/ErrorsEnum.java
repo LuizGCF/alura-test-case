@@ -9,7 +9,8 @@ public enum ErrorsEnum {
     A201("A-201", "The code provided for the course is already in use."),
     A202("A-202", "Only instructors can author a course."),
     A203("A-203", "Course not found."),
-    A204("A-204", "Course is already inactive.");
+    A204("A-204", "Course is already inactive."),
+    A301("A-301", "User is already registered to this course.");
 
     public String code;
     public String message;

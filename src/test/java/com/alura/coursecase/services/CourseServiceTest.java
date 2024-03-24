@@ -65,6 +65,10 @@ public class CourseServiceTest {
 
         assertEquals(ErrorsEnum.A201.message, exception.getMessage());
         assertEquals(ErrorsEnum.A201.code, exception.getCode());
+
+        verify(courseRepository, times(1)).existsByCode(anyString());
+        verify(userRepository, times(0)).findRoleById(anyInt());
+        verify(courseRepository, times(0)).save(course);
     }
 
     @Test
@@ -79,6 +83,10 @@ public class CourseServiceTest {
 
         assertEquals(ErrorsEnum.A101.message, exception.getMessage());
         assertEquals(ErrorsEnum.A101.code, exception.getCode());
+
+        verify(courseRepository, times(1)).existsByCode(anyString());
+        verify(userRepository, times(1)).findRoleById(anyInt());
+        verify(courseRepository, times(0)).save(course);
     }
 
     @Test
@@ -93,6 +101,10 @@ public class CourseServiceTest {
 
         assertEquals(ErrorsEnum.A202.message, exception.getMessage());
         assertEquals(ErrorsEnum.A202.code, exception.getCode());
+
+        verify(courseRepository, times(1)).existsByCode(anyString());
+        verify(userRepository, times(1)).findRoleById(anyInt());
+        verify(courseRepository, times(0)).save(course);
     }
 
     @Test
@@ -118,6 +130,9 @@ public class CourseServiceTest {
 
         assertEquals(ErrorsEnum.A203.message, exception.getMessage());
         assertEquals(ErrorsEnum.A203.code, exception.getCode());
+
+        verify(courseRepository, times(1)).findByCode(anyString());
+        verify(courseRepository, times(0)).save(any());
     }
 
     @Test
@@ -129,6 +144,9 @@ public class CourseServiceTest {
 
         assertEquals(ErrorsEnum.A204.message, exception.getMessage());
         assertEquals(ErrorsEnum.A204.code, exception.getCode());
+
+        verify(courseRepository, times(1)).findByCode(anyString());
+        verify(courseRepository, times(0)).save(course);
     }
 
     @Test
