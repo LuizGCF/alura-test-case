@@ -3,7 +3,6 @@ package com.alura.coursecase.controllers.request;
 import com.alura.coursecase.enums.StatusEnum;
 import com.alura.coursecase.models.CourseModel;
 import com.alura.coursecase.models.UserModel;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -26,7 +25,6 @@ public class PostCourseRequest {
 
     @NotNull(message = "The attribute id_instructor is required.")
     @Range(min = 1)
-    @JsonAlias("id_instructor")
     private Integer idInstructor;
 
     @NotEmpty(message = "The description username is required.")

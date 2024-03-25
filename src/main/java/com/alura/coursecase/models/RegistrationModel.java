@@ -23,4 +23,8 @@ public class RegistrationModel {
     private CourseModel course;
     @Column(name = "registration_date")
     private LocalDateTime registrationDate;
+    @OneToOne
+    @JoinColumn(name = "id_feedback")
+    @Setter
+    private FeedbackModel feedback;
 }

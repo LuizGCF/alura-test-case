@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.POST, "/user", "/auth/login").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/user/**", "/course").hasRole(RolesEnum.ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/user/**", "/course", "/feedback/report").hasRole(RolesEnum.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/course").hasRole(RolesEnum.ADMIN.name())
                                 .requestMatchers(HttpMethod.PATCH, "/course/deactivate/**").hasRole(RolesEnum.ADMIN.name())
                                 .anyRequest().authenticated()

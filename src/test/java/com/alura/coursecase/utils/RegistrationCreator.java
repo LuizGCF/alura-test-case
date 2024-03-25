@@ -14,6 +14,26 @@ public class RegistrationCreator {
                 .build();
     }
 
+    public static RegistrationModel createValidRegistrationForFeedbackSending(){
+        return RegistrationModel.builder()
+                .id(1)
+                .user(UserCreator.createValidUser())
+                .course(CourseCreator.createValidCourse())
+                .registrationDate(LocalDateTime.now())
+                .feedback(null)
+                .build();
+    }
+
+    public static RegistrationModel createValidRegistrationWithFeedback(){
+        return RegistrationModel.builder()
+                .id(1)
+                .user(UserCreator.createValidUser())
+                .course(CourseCreator.createValidCourse())
+                .registrationDate(LocalDateTime.now())
+                .feedback(FeedbackCreator.createValidFeedback())
+                .build();
+    }
+
     public static RegistrationModel createInvalidRegistration(){
         return RegistrationModel.builder()
                 .user(UserCreator.createValidUser())

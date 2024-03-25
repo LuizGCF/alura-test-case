@@ -127,4 +127,31 @@ public class GlobalExceptionHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }
+
+    @ExceptionHandler({RegistrationNotFoundException.class})
+    public ResponseEntity<Object> handleCRegistrationNotFoundException(RegistrationNotFoundException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.NOT_FOUND.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({FeedbackAlreadySentException.class})
+    public ResponseEntity<Object> handleFeedbackAlreadySentException(FeedbackAlreadySentException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.FORBIDDEN.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
+    @ExceptionHandler({InvalidFeedbackObjectException.class})
+    public ResponseEntity<Object> handleInvalidFeedbackObjectException(InvalidFeedbackObjectException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
 }
