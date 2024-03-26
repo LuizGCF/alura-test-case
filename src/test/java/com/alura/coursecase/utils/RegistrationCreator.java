@@ -42,4 +42,13 @@ public class RegistrationCreator {
                 .build();
     }
 
+    public static RegistrationModel createInactiveCourseRegistration(){
+        return RegistrationModel.builder()
+                .id(2)
+                .user(UserCreator.createValidUser())
+                .course(CourseCreator.createInactiveCourse())
+                .registrationDate(LocalDateTime.now())
+                .build();
+    }
+
 }

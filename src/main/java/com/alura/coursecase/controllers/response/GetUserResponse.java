@@ -3,7 +3,6 @@ package com.alura.coursecase.controllers.response;
 import com.alura.coursecase.models.UserModel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 
 @Builder
 @Getter

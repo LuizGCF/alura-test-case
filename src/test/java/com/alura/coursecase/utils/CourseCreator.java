@@ -42,4 +42,17 @@ public class CourseCreator {
                 .creationDate(LocalDateTime.now())
                 .build();
     }
+
+    public static CourseModel createInactiveCourse(){
+        return CourseModel.builder()
+                .id(2)
+                .instructor(UserCreator.createValidInstructorUser())
+                .name("Old Java")
+                .code("old")
+                .description("Old Java course")
+                .status(StatusEnum.INACTIVE.name())
+                .creationDate(LocalDateTime.now())
+                .creationDate(LocalDateTime.now())
+                .build();
+    }
 }

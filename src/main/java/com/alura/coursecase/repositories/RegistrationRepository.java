@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface RegistrationRepository extends JpaRepository<RegistrationModel, Integer> {
 
-    @Query(value = "SELECT IF(COUNT(r.id) > 0, 'true', 'false') FROM registration r where r.id_user =?1 AND r.id_course = ?2", nativeQuery = true)
+    @Query(value = "SELECT CASE WHEN COUNT(r.id) > 0 THEN 'true' ELSE 'false' END FROM registration r where r.id_user =?1 AND r.id_course = ?2", nativeQuery = true)
     boolean existsByIdUserAndIdCourse(Integer idUser, Integer idCourse);
 
     @Query(value = "SELECT * FROM registration r WHERE r.id_course IN ( SELECT id_course FROM registration GROUP BY id_course HAVING COUNT(id_course) >= 4)", nativeQuery = true)

@@ -154,4 +154,13 @@ public class GlobalExceptionHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }
+
+    @ExceptionHandler({FeedbackNotFoundException.class})
+    public ResponseEntity<Object> handleFeedbackNotFoundException(FeedbackNotFoundException exception) {
+        ExceptionResponse response = new ExceptionResponse(exception.getCode(), exception.getMessage(), HttpStatus.NOT_FOUND.value(), LocalDateTime.now(), null);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
 }

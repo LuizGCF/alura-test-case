@@ -44,4 +44,29 @@ public class UserCreator {
                 .creationDate(LocalDateTime.now())
                 .build();
     }
+
+    public static UserModel createValidInstructorUserToBeSaved() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return UserModel.builder()
+                .name("Sam")
+                .username("sam")
+                .password(passwordEncoder.encode("password"))
+                .email("sam@gmail.com")
+                .role(RolesEnum.INSTRUCTOR.name())
+                .creationDate(LocalDateTime.now())
+                .build();
+    }
+
+    public static UserModel createValidUserWithPasswordDecoded() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return UserModel.builder()
+                .id(1)
+                .name("John")
+                .username("john")
+                .password("password")
+                .email("john@gmail.com")
+                .role(RolesEnum.STUDENT.name())
+                .creationDate(LocalDateTime.now())
+                .build();
+    }
 }

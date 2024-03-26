@@ -73,7 +73,7 @@ public class FeedbackService {
 
     public List<GetCoursesReportResponse> listCoursesReport() {
         Optional<List<RegistrationModel>> optionalRegistrations = registrationRepository.findByIdCourseGreaterThanThreeOcurrences();
-        if (optionalRegistrations.isEmpty())
+        if (optionalRegistrations.isEmpty() || optionalRegistrations.get().isEmpty())
             throw new FeedbackNotFoundException(ErrorsEnum.A402.code, ErrorsEnum.A402.message);
 
         List<RegistrationModel> registrations = optionalRegistrations.get();
